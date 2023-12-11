@@ -1,0 +1,618 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <meta charset="UTF-8">
+    <title>HTML5 with Hanbit</title> 
+    <!-- 초기화 -->
+    <style>
+        * {
+            margin: 0; padding: 0;
+            font-family: 'Malgun Gotic', sans-serif;
+        }
+
+        a { text-decoration: none; }
+        img { border: 0; }
+        li { list-style: none; }
+        html { background: #f7f5f5; }
+    </style>
+    <!-- 헤더 -->
+    <style>
+        #main-header {
+            height: 40px;
+            background: #faf7f7;
+
+            position: relative;
+        }
+
+        .header-search-form {
+            float: left;
+        }
+
+        .header-title {
+            position: absolute;
+            width: 200px; height:  40px;
+            left: 50%; margin-left: -100px;
+            background: url('logo.png');
+            background-repeat: no-repeat;
+
+            text-indent: 0px;
+            overflow: hidden;
+        }
+
+        .header-menu {
+            float: right;
+        }
+    </style>
+    <!-- 드롭다운 -->
+    <style>
+        .outer-menu {
+            float: left;
+            width: 100px; height: 20px;
+            line-height: 20px;
+            padding: 10px 0;
+            position: relative;
+            text-align: center;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            z-index: 9999;
+        }
+
+        .outer-menu:hover { background: #E1DFDF; }
+
+        .inner-menu {
+            display: none;
+            background: #FFFFFF;
+            margin-top: 10px;
+            width: 100%;
+
+            border-top: 1px solid #cccaca;
+            box-shadow: 0 2px 4px rgba(34,25,25,0.5);
+        }
+
+        .inner-menu a {
+            display: block;
+            padding: 5px 10px;
+            z-index: 5000;
+        }
+
+        .inner-menu a:hover { background: #E1DFDF; }
+    </style>
+    <!-- 네비게이션 메뉴 -->
+    <style>
+        #main-navigation {
+            height: 30px;
+            background: #faf7f7;
+            border-top: 1px solid #cfcaca;
+            box-shadow: 1px 3px 3px rgba(34, 25, 25, 0.4);
+        }
+
+        #main-navigation > ul {
+            overflow:hidden;
+            text-align: center;
+        }
+
+        #main-navigation > ul > li {
+            display: inline;
+
+            padding: 0 5px;
+
+            line-height: 30px;
+            font-size: 13px;
+            color: #524D4D;
+            text-shadow: 0 1px 1px white;
+        }
+
+        #main-navigation > ul > li:hover { 
+            background: #E1DFDF;
+            border-radius: 2px;
+        }
+    </style>
+    <!-- 검색 양식 -->
+    <style>
+        .header-search-form {
+            height: 26px;
+            padding: 7px;
+        }
+
+        .input-search {
+            display: block;
+            float: left;
+
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            border-radius: 15px 0 0 15px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+
+            width: 120px; height: 24px;
+            padding: 0 0 0 10px;
+            font-size: 12px;
+            color: #555555;
+        }
+
+        .input-search:focus {
+            border-color: rgba(82, 168, 236, 0.8);
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-search-submit {
+            display: block;
+            float: left;
+
+            width: 50px; height: 26px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid #CCCCCC;
+
+            margin-left: -1px;
+
+            vertical-align: top;
+            display: inline-block;
+        }
+
+    </style>
+    <!-- 종이 스타일 -->
+    <style>
+        .paper {
+            width: 190px;
+            margin-top: 10px;
+            padding: 15px 15px 0;
+            font-size: 11px;
+            background: #FFFFFF;
+            box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+        }
+
+        .paper-content {
+            margin: 0 -15px;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #F2F0F0;
+
+            overflow: hidden;
+        }
+
+        .paper-description {
+            margin: 10px 0;
+        }
+
+        .paper-link {
+            display: block;
+            float: left;
+        }
+
+        .paper-text {
+            float: left;
+            width: 150px;
+            margin-left: 10px;
+        }
+    </style>
+    <!-- 섹션 -->
+    <style>
+        /* 미디어 쿼리를 지원하지 않는 웹 브라우저 */
+        #main-section {
+            width: 100%;
+            max-width: 1380px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(690px, 1fr));
+            grid-gap: 20px;
+            justify-items: center;
+        }
+
+        /* 각 아이템에 대한 스타일 */
+        .item {
+            background-color: lightgray;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 300px;
+        }
+
+          /* 미디어 쿼리 - 화면 너비에 따른 조정 */
+        @media (min-width: 690px) {
+            #main-section {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 689px) {
+            #main-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 라이트박스 -->
+    <style>
+        #darken-background {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 100%; 
+
+            display: none;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            overflow-y: scroll;
+        }
+
+        #lightbox {
+            width: 700px;
+            margin: 20px auto; padding: 15px;
+
+            border: 1px solid #333333;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 5px 5px rgba(34, 25, 25, 0.4);
+
+            text-align: center;
+        }
+
+        .user-information {  overflow: hidden;  text-align: left; }
+        .user-information-image { float: left; width: 70px; }
+        .user-information-text { float: right; width: 620px;  }
+        .lightbox-splitter { margin: 10px 0; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="jquery.masonry.min.js"></script>
+    <script src="jquery.imagesloaded.min.js"></script>
+    <script>
+        // 풀다운 메뉴
+        $(document).ready(function () {
+            // 풀다운 메뉴
+            $('.outer-menu').hover(function () {
+                $(this).find('.inner-menu').css('display', 'block');
+            }, function () {
+                $(this).find('.inner-menu').css('display', 'none');
+            });
+        });
+
+        // 페이지
+        $(document).ready(function () {
+            // 이미지 로드 확인
+            $('#main-section').imagesLoaded(function () {
+                // jQuery Masonry 플러그인 적용
+                $('#main-section').masonry({
+                    itemSelector: '.paper',
+                    columnWidth: 230,
+                    isAnimated: true
+                });
+            });
+});
+          
+        
+        // 라이트 박스
+        $(document).ready(function () {
+            function showLightBox() {
+                // 라이트박스를 보이게 합니다.
+                $('#darken-background').show();
+                $('#darken-background').css('top', $(window).scrollTop());
+                // 스크롤을 못하게 합니다.
+                $('body').css('overflow', 'hidden');
+            }
+
+            function hideLightBox() {
+                // 라이트박스를 안 보이게 합니다.
+                $('#darken-background').hide();
+
+                // 스크롤을 하게 합니다.
+                $('body').css('overflow', '');
+            }
+
+            // 라이트박스 제거 이벤트
+            $('#darken-background').click(function () {
+                hideLightBox();
+            });
+
+              // 클릭 이벤트 연결
+            $('.paper').click(function () {
+                showLightBox();
+            });
+
+            // 라이트박스 제거 이벤트 보조
+            $('#lightbox').click(function (event) {
+                event.stopPropagation()
+            });
+        });
+    </script>
+</head> 
+<body> 
+    <!-- 헤더 --> 
+    <header id="main-header"> 
+        <div class="header-search-form"> 
+            <form> 
+                <input type="search" class="input-search"> 
+                <input type="submit" class="input-search-submit" value="검색"> 
+            </form> 
+        </div> 
+        <h1 class="header-title">Interest</h1> 
+        <div class="header-menu"> 
+            <ul class="outer-menu"> 
+                <li> 
+                    <a href="#">정보</a> 
+                    <ul class="inner-menu"> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                    </ul> 
+                </li> 
+            </ul> 
+            <ul class="outer-menu"> 
+                <li> 
+                    <a href="#">사용자</a> 
+                    <ul class="inner-menu"> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                        <li><a href="#">데이터</a></li> 
+                    </ul> 
+                </li> 
+            </ul> 
+        </div> 
+    </header> 
+    <!-- 네비게이션 메뉴 --> 
+    <nav id="main-navigation"> 
+        <ul> 
+            <li><a href="#">Following</a></li> 
+            <li><a href="#">Categories</a></li> 
+            <li><a href="#">Everything</a></li> 
+            <li><a href="#">Popular</a></li> 
+            <li><a href="#">Gift</a></li> 
+        </ul> 
+    </nav> 
+    <!-- 본문 영역 --> 
+    <section id="main-section"> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.yes24.com%2Fgoods%2F112630054%2FXL&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">BTS 뷔</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=http%3A%2F%2Ffile3.instiz.net%2Fdata%2Fcached_img%2Fupload%2F2022%2F10%2F20%2F10%2F43976d9efe98d60d52af9a2b45d60253.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">가수 겸 배우 아이유</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA1MjBfMjIw%2FMDAxNjIxNDk0NzI5MzQ1.W2E6S3J9yPBxq4Uz1G-dvAVCyZl4-_8u1DFsrk4nE3og.OnWXC0eKsbAsaOOIYtXhsrqYetF3_66u027acTCcDHog.JPEG.lauramarling%2FE1W4-WMWEAIj2ir.jpeg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">블랙핑크 리사</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5263%2F2020%2F05%2F21%2F21-511279_20200521090831650.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">배우 수지</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxOTA4MThfMTU2%2FMDAxNTY2MDkxODY2ODA4.vnggRqbJ-DubbqoNJ8G0tZyhvDv3PCgRAsG75---EFEg.sQ_1T7zD6K_-7muWXmAeuTGz7TrWm9a0qp74ah1Yw4kg.JPEG%2FexternalFile.jpg&type=a340"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">레드벨벳 조이</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.aladin.co.kr%2Fproduct%2F28144%2F97%2Fcover500%2Fk852835763_1.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">모델 정호연</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5361%2F2022%2F03%2F04%2F0000128744_001_20220304091202083.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">배우 송중기</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.namu.wiki%2Fi%2Ff3jgx-YqDT6wR-yUfpRniCOr5swr51T-NtGJ1DPZtEcFzoen_P3qnfq-1iRxZraxTB1PRO3SSxvQXarjOwu_ew.webp&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">블랙핑크 지수</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.aladin.co.kr%2Fproduct%2F23780%2F18%2Fcover500%2Fk712639980_1.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">블랙핑크 제니</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F081%2F2013%2F08%2F16%2FBOO_20130816183703_V_59_20130816185202.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">배우 전지현</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F015%2F2012%2F05%2F23%2Fe40eaecab182d23f8b962e6a00bc486f.JPG&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">모델 한혜진</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F117%2F2007%2F05%2F18%2F200705181523191122_1.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">베우 송혜교</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA3MTBfMjMw%2FMDAxNTMxMjI1MTI5MjIy.P9_M4f1FP_0lyO6p6ycVkrLj308UPLkAiIZ5RRy_gT4g.9Wuf2wJGk0yB7oSE3hRHNXltPmUpUcgV7p2UM-062y0g.JPEG.0610dldbwls%2FNaverBlog_20180710_211848_01.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">엑소 세훈</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODAxMjhfMTkg%2FMDAxNTE3MDgyNTcyODEz.yl6M6XF2xwkkx9dm3ZnQM410Xu5oniCsKkUVrMBQbH0g.C2_MfuP4H9jTQezdH1peOME753PyNaCGMWRKZniTj00g.JPEG.castingpop1004%2Fvogue_korea_0202.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">모델 수주</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MThfMjc2%2FMDAxNjI2NjE2NTYxODYy.7K0GJgvMWTH1BG8p2PfAkDOsN1K4c0t65K2IKMZEgfog.yiwvfZaH2IPVvmOuajbaydUOOXUZrhJ3rC8G6NVpazQg.JPEG.slpjaewon%2Fi3904000120447.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">모델 최소라</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA3MTVfMTM5%2FMDAxNTk0Nzk3NjAyMjQ0.vkc2LBXdpuBnqV1vvLKlO3TyvULY7-DkiWSWfSMdoqQg.888FI61XgxdNIf3G1uU86mvQtvbbm8wh2XRifo391KEg.JPEG.cp015998%2F%25B9%25DA%25BA%25B8%25B0%25CB_%25B8%25C5%25B0%25C5%25C1%25F8_%25BA%25B8%25B1%25D7_%25C4%25DA%25B8%25AE%25BE%25C6_8%25BF%25F9%25C8%25A3_%25C4%25BF%25B9%25F6_2020.07.15_%25284%2529.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">배우 박보검</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODAxMjhfMTI3%2FMDAxNTE3MDgxNzc1Nzgw.ZHltKghgXQc9i77_ly95sO5zwrM4ldn0SCN3UQk7UAsg.yFD-f4VK6oMztlOGHqam14UgMRQmEghTk0FsRcUgjIAg.JPEG.castingpop1004%2Fvogue_korea_026.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">모델 최소라, 신현지, 배윤영</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMDhfMTQy%2FMDAxNjQxNTcwOTk0OTIw.yB0kxsIImsygN5MBoTnuil6Rdr4-ur3kw70R0wi6BxAg.pCE7yYDR5DkGLosmh_gR02oC_-Kc4SR9ypXOQsOtcTsg.JPEG.muder1124%2F20380716415562204.jpg&type=a340"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">댄서 노제</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F311%2F2014%2F05%2F26%2F1401108045130_99_20140526214304.jpg&type=a340"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">김연아</p> 
+            </div> 
+        </div> 
+         
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.011st.com%2F11dims%2Fresize%2F600x600%2Fquality%2F75%2F11src%2Fpd%2F22%2F9%2F1%2F7%2F1%2F2%2F3%2FwEszM%2F4232917123_B.jpg&type=sc960_832"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">블랙핑크 지수</p> 
+            </div> 
+        </div> 
+
+        <div class="paper"> 
+            <div class="paper-holder"> 
+                <a><img width="190" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.yes24.com%2Fgoods%2F71729774%2FXL&type=a340"></a> 
+            </div> 
+            <p class="paper-description">VOGUE</p> 
+            <div class="paper-content"> 
+                <a class="paper-link" href="#"><img src="https://placekitten.com/30/30"></a> 
+                <p class="paper-text">배우 박서준</p> 
+            </div> 
+        </div> 
+         
+    </section> 
+    <!-- 라이트박스 --> 
+    <div id="darken-background"> 
+        <div id="lightbox"> 
+            <div class="user-information"> 
+                <a class="user-information-image" href="#">
+                    <img src="https://via.placeholder.com/70x70" alt="Placeholder Image" width="70" height="70">
+                </a> 
+                <div class="user-information-text">
+                    <h3>사용자</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sem mi, egestas a facilisis eget, egestas ut magna.</p>
+                </div> 
+            </div>
+            <hr class="lightbox-splitter">
+            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA3MTVfMTM5%2FMDAxNTk0Nzk3NjAyMjQ0.vkc2LBXdpuBnqV1vvLKlO3TyvULY7-DkiWSWfSMdoqQg.888FI61XgxdNIf3G1uU86mvQtvbbm8wh2XRifo391KEg.JPEG.cp015998%2F%25B9%25DA%25BA%25B8%25B0%25CB_%25B8%25C5%25B0%25C5%25C1%25F8_%25BA%25B8%25B1%25D7_%25C4%25DA%25B8%25AE%25BE%25C6_8%25BF%25F9%25C8%25A3_%25C4%25BF%25B9%25F6_2020.07.15_%25284%2529.jpg&type=sc960_832"> 
+        </div> 
+    </div> 
+</body>
+<h1>2302529 권지연</h1> 
+</html> 

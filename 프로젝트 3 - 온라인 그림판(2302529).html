@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>온라인 그림판</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script>
+        $(document).ready(function () {
+            let color = 'pink';
+            let width = 1;
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            const socket = io.connect();
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+
+            canvas.addEventListener('mousedown', (event) => {
+                isDrawing = true;
+                [lastX, lastY] = [event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop];
+            });
+
+            canvas.addEventListener('mousemove', (event) => {
+                if (!isDrawing) return;
+                const x = event.pageX - canvas.offsetLeft;
+                const y = event.pageY - canvas.offsetTop;
+                
+                context.beginPath();
+                context.lineWidth = width;
+                context.lineCap = 'round';
+                context.strokeStyle = color;
+                context.moveTo(lastX, lastY);
+                context.lineTo(x, y);
+                context.stroke();
+
+                socket.emit('line', {
+                    x1: lastX,
+                    y1: lastY,
+                    x2: x,
+                    y2: y,
+                    color: color,
+                    width: width
+                });
+
+                [lastX, lastY] = [x, y];
+            });
+
+            canvas.addEventListener('mouseup', () => {
+                isDrawing = false;
+            });
+
+            $('#pen').click(function (){
+                width = 1;
+                color = 'black';
+                $('#width').val(width);
+            });
+            $('#eraser').click(function () {
+                width = 10;
+                color = 'white';
+                $('#width').val(width);
+            });
+            $('#width').change(function (){
+                width = $(this).val()
+            });
+
+            socket.on('line', function (data) {
+                context.beginPath();
+                context.lineWidth = data.width;
+                context.strokeStyle = data.color;
+                context.moveTo(data.x1, data.y1);
+                context.lineTo(data.x2, data.y2);
+                context.stroke();
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="pen">펜</button>
+    <button id="eraser">지우개</button>
+    <input id="width" type="range" min="1" max ="10" value="1" />
+    <br />
+    <canvas id="canvas" width="1000" height="600"></canvas>
+</body>
+<h1>2302529 권지연</h1>
+</html>

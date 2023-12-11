@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 슬라이더</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .slider {
+            position: relative;
+            width: 460px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .images {
+            position: absolute;
+            width: auto;
+            display: flex; /* 이미지들을 옆으로 나열하기 위해 flex 사용 */
+            transition: left 1s ease; /* 슬라이드 애니메이션 추가 */
+        }
+        .image {
+            width: 460px;
+            height: 300px;
+            flex: 0 0 auto; /* flex 아이템이 축소되지 않도록 설정 */
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            let current = 0; // 변수를 선언
+            const width = 460;
+            
+            // 함수를 선언
+            const moveTo = function () {
+                $('.images').css('left', -current * width); // left 속성을 변경해 슬라이드
+            };
+
+            const imageLength = $('.slider').find('.image').length; // 슬라이더 내 이미지 개수 확인
+
+            // 3초마다 슬라이더를 이동
+            setInterval(function () {
+                current = (current + 1) % imageLength;
+                moveTo();
+            }, 3000);
+
+            // 슬라이더 스타일을 설정
+            $('.images').css('width', width * imageLength); // .images 너비 설정
+
+            // 슬라이더 버튼을 추가
+            for (let i = 0; i < imageLength; i++) {
+                $('<button></button>')
+                    .attr('data-position', i)
+                    .text(i)
+                    .click(function () {
+                        current = $(this).attr('data-position');
+                        moveTo();
+                    })
+                    .insertBefore('.slider');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="slider">
+        <div class="images">
+            <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzExMjBfMTQ4%2FMDAxNzAwNDcwNDI5MDA5.SfzmpNkKi5qoAQ7TANffPRLAkRiIJOyJShU8DFZHVd4g._M46zoZvVSBElmDLbmmB59gyXxi1u-hbvT__ajxtpUkg.PNG.zhn8261%2F20231120_174632.png&type=sc960_832" />
+            <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA5MjdfMjk0%2FMDAxNjk1ODIxMjcwMzgw.f7jJY5emekb498dcrqOWif2_vtNE6WioaPeDvz4Zev4g.ZyVjXKW-4cqohkjPeTXeAQ-MbY_lkJsbyhtwCuTuIxEg.JPEG.wonderful510%2Fanna%25A3%25AD20230501%25A3%25AD161026%25A3%25AD001.jpg&type=a340" />
+            <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMThfMSAg%2FMDAxNjA4Mjc2NzUyMzgw.XzwueiHSC8iOqw8ctP70mC9VDSta8RkGVeVYinnur2og.jmf58XwaWutI0lG8X7jOxNT-5Q_3t09lEH7jgtTr-4og.JPEG.jaejinruby%2FWarm_Christmas_Mickey_-_Disney_Christmas_Gift_Wallpaper_1920x1200.jpg&type=sc960_832" />
+            <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEyMTdfNTAg%2FMDAxNTEzNDk5NDY5NDUw.4ZHxZtrJZNBB9142AmJZmJOA8AWZNr0I31Ef9IZltMYg.9nCbhU7shE_N6EBDoyO_Ls63_BUlR3vnbj8H5dPkNw4g.JPEG.heenak12%2FK-017.jpg&type=sc960_832" />
+        </div>
+    </div>
+</body>
+<h1>2302529 권지연</h1>
+</html>
+
